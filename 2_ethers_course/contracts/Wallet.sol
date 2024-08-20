@@ -12,4 +12,13 @@ contract Wallet {
     function getValue() public view returns (uint){
         return num;
     }
+
+     //Function to send eth to this contract
+    function sendEthContract() public payable {
+
+    }
+
+    function contractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
 }
