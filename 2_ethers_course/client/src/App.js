@@ -74,10 +74,40 @@ function App() {
     }
   };
 
+
+
+  const sendEthToUser = async () => {
+    try {
+      // Connect to MetaMask and request accounts
+      const provider = new ethers.BrowserProvider(window.ethereum);
+
+      await provider.send("eth_requestAccounts", []); // Request MetaMask accounts
+
+      const signer = await provider.getSigner();
+
+      // Instantiate the contract with the signer
+      const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+
+      // Perform the sendEthUser operation with 0.1 Ether
+      const tx = await contractInstance.sendEthUser("0x955B386F9A71106f8A138aA27a30aa91544E3bEc", {
+        value: ethers.parseEther("0.1") // Send 0.1 Ether
+      });
+      console.log('Transaction hash:', tx.hash);
+
+      // Wait for the transaction to be mined
+      await tx.wait();
+      console.log('Ether sent to user successfully');
+    } catch (error) {
+      console.error("Error in sendEthToUser:", error);
+    }
+  };
+
   return (
     <div className="App">
       <h1>Smart Contract Interaction</h1>
       <button onClick={sendEthToContract}>Send 0.1 Ether to Contract</button>
+      <button onClick={sendEthToUser}>Send 0.1 Ether to User</button>
+    
     </div>
   );
 }
