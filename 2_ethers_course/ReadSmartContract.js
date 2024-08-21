@@ -111,5 +111,14 @@ const contractRead = async() => {
     const numInEth = ethers.formatEther(num);
     console.log("Num in ETH is:", numInEth);
 
+    const contractBal = await walletContract.contractBalance();
+    const contBalInEth = ethers.formatEther(contractBal);
+    console.log("Contract balance in ETH is:", contBalInEth);
+
+    const usrBal = await walletContract.accountBalance("0xc4997D2E1C0d89e5cFd97228aF402Ecf80249d24");
+    const usrBalInEth = ethers.formatEther(usrBal);
+    console.log("User balance in ETH is:", usrBalInEth);
+
+
 }
 contractRead();
