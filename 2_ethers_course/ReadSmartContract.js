@@ -96,3 +96,20 @@ const walletAbi = [
 		"type": "function"
 	}
 ]
+
+const contractRead = async() => {
+
+
+    const walletContract = new ethers.Contract(walletAddress, walletAbi, provider) //Contract instance
+
+    //Read the name method of contract
+    const contractName = await walletContract.name();
+    console.log("Name of contract:", contractName);
+
+    const num = await walletContract.getValue();
+    console.log("Num is:", num);
+    const numInEth = ethers.formatEther(num);
+    console.log("Num in ETH is:", numInEth);
+
+}
+contractRead();
