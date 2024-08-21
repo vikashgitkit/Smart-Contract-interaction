@@ -2,8 +2,8 @@ const {ethers} = require("ethers");
 
 const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/a76eaf5b433645498bf2cce4c3b81f06`);
 
-const walletAddress = "0x161F822941dD10282043058A868b647C5bdd159c";
-const walletAbi = [
+const contractAddress = "0x161F822941dD10282043058A868b647C5bdd159c";
+const contractAbi = [
 	{
 		"inputs": [],
 		"name": "sendEthContract",
@@ -100,7 +100,7 @@ const walletAbi = [
 const contractRead = async() => {
 
 
-    const walletContract = new ethers.Contract(walletAddress, walletAbi, provider) //Contract instance
+    const walletContract = new ethers.Contract(contractAddress, contractAbi, provider) //Contract instance
 
     //Read the name method of contract
     const contractName = await walletContract.name();
