@@ -7,7 +7,18 @@ const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/a76eaf
 //let's read some data from blockchain
 const queryBlockchain = async() => {
     const blockNum = await provider.getBlockNumber();
-    console.log(`Current Block Number is ${blockNum}`);
+    console.log(`Current Block Number is: ${blockNum}`);
+
+    //Get wallet balance and convert big int(wei) into ether and wei
+    const bal = await provider.getBalance("0xc4997D2E1C0d89e5cFd97228aF402Ecf80249d24")
+    console.log(`Balance of address is: ${bal}`)
+
+    //Convert big int into ether
+    const balInEther = ethers.formatEther(bal);
+    console.log(`Big num object convert in ether is: ${balInEther}`)
+
+    const balInWei = ethers.parseEther(balInEther);
+    console.log(`Ether convert in wei is: ${balInWei}`)
 }
 
 queryBlockchain();
