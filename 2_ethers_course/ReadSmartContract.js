@@ -100,22 +100,20 @@ const contractAbi = [
 const contractRead = async() => {
 
 
-    const walletContract = new ethers.Contract(contractAddress, contractAbi, provider) //Contract instance
+    const contractInstance = new ethers.Contract(contractAddress, contractAbi, provider) //Contract instance
 
     //Read the name method of contract
-    const contractName = await walletContract.name();
+    const contractName = await contractInstance.name();
     console.log("Name of contract:", contractName);
 
-    const num = await walletContract.getValue();
+    const num = await contractInstance.getValue();
     console.log("Num is:", num);
-    const numInEth = ethers.formatEther(num);
-    console.log("Num in ETH is:", numInEth);
 
-    const contractBal = await walletContract.contractBalance();
+    const contractBal = await contractInstance.contractBalance();
     const contBalInEth = ethers.formatEther(contractBal);
     console.log("Contract balance in ETH is:", contBalInEth);
 
-    const usrBal = await walletContract.accountBalance("0xc4997D2E1C0d89e5cFd97228aF402Ecf80249d24");
+    const usrBal = await contractInstance.accountBalance("0xc4997D2E1C0d89e5cFd97228aF402Ecf80249d24");
     const usrBalInEth = ethers.formatEther(usrBal);
     console.log("User balance in ETH is:", usrBalInEth);
 
