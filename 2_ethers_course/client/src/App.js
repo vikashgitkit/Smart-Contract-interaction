@@ -13,7 +13,7 @@ function App() {
         const provider = new ethers.BrowserProvider(window.ethereum);
         console.log("Provider is:", provider);
 
-        await provider.send("eth_requestAccounts", []); // Request MetaMask accounts
+        await provider.send("eth_requestAccounts", []); // Request MetaMask accounts(requests access to the user's Ethereum accounts, ensuring that your dApp is authorized to interact with those accounts.)
 
         const signer = await provider.getSigner();
         console.log("Signer is:", signer);
@@ -22,12 +22,23 @@ function App() {
         const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
 
         // Perform the write operation (setValue)
-        const tx = await contractInstance.setValue(111);
-        console.log('Transaction hash:', tx.hash);
+        const tx1 = await contractInstance.setValue(111);
+        console.log('Transaction hash:', tx1.hash);
 
         // Wait for the transaction to be mined
-        await tx.wait();
+        await tx1.wait();
         console.log('Transaction confirmed');
+
+
+         // Perform the sendEthContract operation with a specified amount of Ether
+         const tx2 = await contractInstance.sendEthContract({
+          value: ethers.parseEther("0.1") // Send 0.01 Ether
+        });
+        console.log('sendEthContract Transaction hash:', tx2.hash);
+
+        // Wait for the sendEthContract transaction to be mined
+        await tx2.wait();
+        console.log('Ether sent to contract successfully');
       } catch (error) {
         console.error("Error in writeContract:", error);
       }
