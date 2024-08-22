@@ -17,6 +17,24 @@ const contract = new ethers.Contract(contractAddr, ERC20_ABI, provider);
 
 const main = async() => {
 
+    const balance = await contract.balanceOf(acc1)
+
+    console.log(`\nReading from ${contractAddr}\n`)
+    console.log(`Balance of sender: ${balance}\n`)
+
+
+    const contractWithWallet = contract.connect(wallet);
+
+    const tx = await contractWithWallet.transfer(acc2, balance);
+    await tx.wait();
+
+    const balanceOfSender = await contract.balanceOf(acc1)
+    const balanceOfReciever = await contract.balanceOf(acc2)
+
+    console.log(`\nBalance of sender: ${balanceOfSender}`)
+    console.log(`Balance of reciever: ${balanceOfReciever}\n`)
+
+
 }
 
 main();
