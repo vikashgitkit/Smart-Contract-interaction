@@ -24,6 +24,11 @@ const main = async() => {
     console.log(`Symbol: ${symbol}`)
     console.log(`Total Supply: ${totalSupply}\n`)
 
+    const balance = await contractInstance.balanceOf('0x6c6Bc977E13Df9b0de53b251522280BB72383700')
+
+    console.log(`Balance Returned: ${balance}`)
+    console.log(`Balance Formatted: ${ethers.formatEther(balance)}\n`)
+
     
 
 }
