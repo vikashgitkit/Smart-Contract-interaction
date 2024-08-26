@@ -8,7 +8,6 @@ const acc2 = '0x955B386F9A71106f8A138aA27a30aa91544E3bEc';
 
 const pvtkey1 = '0fdb8b68d4e081b1802cc9cb82f5bb3d19463d85e1b7afbe39a5bc1cd545bf09';
 const wallet = new ethers.Wallet(pvtkey1, provider);
-
 const ERC20_ABI = [
     "function name() view returns (string)",
     "function symbol() view returns (string)",
@@ -21,3 +20,14 @@ const ERC20_ABI = [
 //Dai token contract address
 const contractAddr = '0x6B175474E89094C44Da98b954EedeAC495271d0F';
 const contract = new ethers.Contract(contractAddr, ERC20_ABI, provider);
+
+const main = async() => {
+    const block = await provider.getBlockNumber();
+    console.log("Current block is:", block)
+
+    const transferEvents = await contract.queryFilter('Transfer', block - 10, block);
+    console.log("Transfer Event is:", transferEvents)
+
+}
+
+main();
