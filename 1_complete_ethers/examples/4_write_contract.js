@@ -25,6 +25,7 @@ const main = async() => {
 
     const contractWithWallet = contract.connect(wallet);
 
+    //Transfer all link token to acc2 from acc1
     const tx = await contractWithWallet.transfer(acc2, balance);
     await tx.wait();
 

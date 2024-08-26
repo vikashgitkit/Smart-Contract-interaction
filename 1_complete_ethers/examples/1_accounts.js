@@ -1,3 +1,4 @@
+//Resource: https://github.com/dappuniversity/ethers_examples/blob/master/examples/6_inspecting_blocks.js
 const {ethers} = require("ethers");
 
 const Rpc_url = 'https://sepolia.infura.io/v3/a76eaf5b433645498bf2cce4c3b81f06';

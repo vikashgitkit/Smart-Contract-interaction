@@ -9,6 +9,7 @@ const ERC20_ABI = [
     "function totalSupply() view returns (uint256)",
     "function balanceOf(address account) external view returns (uint256)",
 ]
+//Sepolia testnet token address(AirdropToken)
 const contractAddr = '0x7f3eA819Ac380b71C2c0c3a79F934de65623008C';
 
 const contractInstance = new ethers.Contract(contractAddr, ERC20_ABI, provider);
